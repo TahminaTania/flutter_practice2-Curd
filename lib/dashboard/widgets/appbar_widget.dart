@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_p2/features/login/login_page.dart';
+import 'package:flutter_p2/features/login/screen/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screen/splash_screen.dart';

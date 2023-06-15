@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_p2/core/constant/constant_apis.dart';
-import 'package:flutter_p2/features/showdata/usermode.dart';
+import 'package:flutter_p2/features/showdata/model/usermode.dart';
 import 'package:http/http.dart';
 
 class UserRepository {

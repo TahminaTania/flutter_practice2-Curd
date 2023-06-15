@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_p2/dashboard/screen/home_screen.dart';
-import 'package:flutter_p2/features/login/login_page.dart';
+import 'package:flutter_p2/features/login/screen/login_page.dart';
 import 'package:flutter_p2/features/showdata/cubit/fetchdata_cubit.dart';
-import 'package:flutter_p2/features/showdata/data_page.dart';
-import 'package:flutter_p2/features/showdata/repository.dart';
+import 'package:flutter_p2/features/showdata/repo/repository.dart';
+import 'package:flutter_p2/features/showdata/screens/data_page.dart';
 
 import 'dashboard/screen/splash_screen.dart';
 

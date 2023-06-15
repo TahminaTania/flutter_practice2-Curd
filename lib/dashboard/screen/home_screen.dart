@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_p2/dashboard/widgets/appbar_widget.dart';
 import 'package:flutter_p2/features/showdata/cubit/fetchdata_cubit.dart';
-import 'package:flutter_p2/features/showdata/data_page.dart';
-import 'package:flutter_p2/features/showdata/repository.dart';
+import 'package:flutter_p2/features/showdata/screens/data_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,8 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
-        <String, dynamic>{}) as Map;
+    final name = ModalRoute.of(context)?.settings.arguments as String?;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -24,8 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                      'Hello ${arguments['user'] != null ? arguments['user'] : 'newUser'}'),
+                  Text('Hello ${name != null ? name : 'newUser'}'),
                   AppbarWidget()
                 ]),
           ),

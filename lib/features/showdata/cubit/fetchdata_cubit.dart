@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_p2/features/showdata/repository.dart';
-import 'package:flutter_p2/features/showdata/usermode.dart';
+import 'package:flutter_p2/features/showdata/model/usermode.dart';
+import 'package:flutter_p2/features/showdata/repo/repository.dart';
 
 part 'fetchdata_state.dart';
 

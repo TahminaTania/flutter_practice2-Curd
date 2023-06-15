@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_p2/dashboard/screen/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../dashboard/screen/splash_screen.dart';
 
 class LogInScreen extends StatelessWidget {
   LogInScreen({Key? key}) : super(key: key);
@@ -41,7 +40,7 @@ class LogInScreen extends StatelessWidget {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.setBool(SplashScreenState.KeyLogin, true);
                 Navigator.of(context, rootNavigator: true)
-                    .pushNamed("/home", arguments: {'user': name});
+                    .pushNamed("/home", arguments: name);
                 // Navigator.pushNamed(
                 //   context,
                 //   '/home',
