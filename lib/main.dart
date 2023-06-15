@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_p2/dashboard/screen/home_screen.dart';
+import 'package:flutter_p2/dashboard/screen/singledata_screen.dart';
 import 'package:flutter_p2/features/login/screen/login_page.dart';
 import 'package:flutter_p2/features/showdata/cubit/fetchdata_cubit.dart';
 import 'package:flutter_p2/features/showdata/repo/repository.dart';

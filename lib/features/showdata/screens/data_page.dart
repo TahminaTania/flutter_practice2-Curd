@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_p2/dashboard/screen/singledata_screen.dart';
 import 'package:flutter_p2/features/showdata/cubit/fetchdata_cubit.dart';
 
 class DataPage extends StatefulWidget {
@@ -47,6 +48,13 @@ class _DataPageState extends State<DataPage> {
                     final data = datas[index];
                     return Card(
                       child: ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      SingledataScreen(data: data)));
+                        },
                         tileColor: Colors.grey,
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
