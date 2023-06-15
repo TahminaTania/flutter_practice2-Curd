@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_p2/dashboard/screen/singledata_screen.dart';
+import 'package:flutter_p2/features/showdata/add/add_data_page.dart';
 import 'package:flutter_p2/features/showdata/cubit/fetchdata_cubit.dart';
+import 'package:flutter_p2/features/showdata/edit/edit_page.dart';
 
 class DataPage extends StatefulWidget {
   const DataPage({Key? key}) : super(key: key);
@@ -23,6 +25,14 @@ class _DataPageState extends State<DataPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddDataPage()));
+            },
+            child: Icon(Icons.add)),
+      ),
       body: SafeArea(child: Container(
         child: BlocBuilder<FetchdataCubit, FetchdataState>(
           builder: (context, state) {
@@ -64,7 +74,14 @@ class _DataPageState extends State<DataPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ElevatedButton(
-                                    onPressed: () {}, child: Icon(Icons.edit)),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EditPage()));
+                                    },
+                                    child: Icon(Icons.edit)),
                                 SizedBox(
                                   width: 10,
                                 ),
