@@ -1,30 +1,46 @@
 part of 'fetchdata_cubit.dart';
 
-abstract class FetchdataState extends Equatable {
-  const FetchdataState();
+abstract class DataState extends Equatable {
+  const DataState();
+
+  List<TodoModel> get todos; // Define the getter for todos
+  // ...
+}
+
+class DataInitial extends DataState {
+  @override
+  List<Object?> get props => throw UnimplementedError();
 
   @override
-  List<Object> get props => [];
+  List<TodoModel> get todos => throw UnimplementedError();
 }
 
-class FetchdataInitial extends FetchdataState {}
+class DataLoadingState extends DataState {
+  @override
+  List<Object?> get props => throw UnimplementedError();
 
-class dataLoadingState extends FetchdataState {
-  // @override
-  // List<Object?> get props => [];
+  @override
+  List<TodoModel> get todos => throw UnimplementedError();
 }
 
-class dataLoadedState extends FetchdataState {
-  final List<UserModel> dataCollections;
-  dataLoadedState(this.dataCollections);
+class DataLoadedState extends DataState {
+  final List<TodoModel> todos;
 
-  // @override
-  // List<Object?> get props => [todos];
+  const DataLoadedState(this.todos);
+
+  @override
+  List<Object?> get props => [todos];
 }
 
-class dataErrorState extends FetchdataState {
-  final String error;
-  dataErrorState(this.error);
-  // @override
-  // List<Object?> get props => [error];
+class DataErrorState extends DataState {
+  final String errorMessage;
+
+  const DataErrorState(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+
+  @override
+  // TODO: implement todos
+  List<TodoModel> get todos => throw UnimplementedError();
 }

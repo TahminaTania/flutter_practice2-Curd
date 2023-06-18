@@ -1,106 +1,96 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_p2/dashboard/screen/singledata_screen.dart';
+import 'package:flutter_p2/features/showdata/DialougeBox/dialoges.dart';
 import 'package:flutter_p2/features/showdata/add/add_data_page.dart';
 import 'package:flutter_p2/features/showdata/cubit/fetchdata_cubit.dart';
 import 'package:flutter_p2/features/showdata/edit/edit_page.dart';
 
 class DataPage extends StatefulWidget {
-  const DataPage({Key? key}) : super(key: key);
-
   @override
   State<DataPage> createState() => _DataPageState();
 }
 
 class _DataPageState extends State<DataPage> {
+  //final TextEditingController _titleController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final cubit = context.read<FetchdataCubit>();
-      cubit.fetchdata();
-    });
+    final cubit = context.read<FetchdataCubit>();
+    cubit.fetchData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddDataPage()));
-            },
-            child: Icon(Icons.add)),
+        title: Text('Todo App'),
       ),
-      body: SafeArea(child: Container(
-        child: BlocBuilder<FetchdataCubit, FetchdataState>(
-          builder: (context, state) {
-            if (state is FetchdataInitial) {
-              return Container(
-                child: Column(
-                  children: [
-                    SizedBox(height: 100),
-                    SizedBox(
-                      child: CircularProgressIndicator(),
-                    ),
-                    SizedBox(
-                      child: Text(state.toString()),
-                    )
-                  ],
-                ),
-              );
-            } else if (state is dataLoadedState) {
-              final datas = state.dataCollections;
-              return ListView.builder(
-                  itemCount: datas.length,
-                  itemBuilder: (context, index) {
-                    final data = datas[index];
-                    return Card(
-                      child: ListTile(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      SingledataScreen(data: data)));
+      body: BlocConsumer<FetchdataCubit, DataState>(
+        listener: (context, state) {
+          if (state is DataErrorState) {
+            DialougesBar.showAlertDialog(
+              context,
+              'Error',
+              state.errorMessage,
+              () => Navigator.pop(context),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is DataLoadingState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is DataLoadedState) {
+            final todos = state.todos;
+            return ListView.builder(
+              itemCount: todos.length,
+              itemBuilder: (context, index) {
+                final todo = todos[index];
+
+                return ListTile(
+                  title: Text(todo.title),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          EditDialog.showEditTodoDialog(context, todo);
                         },
-                        tileColor: Colors.grey,
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(data.title),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EditPage()));
-                                    },
-                                    child: Icon(Icons.edit)),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                ElevatedButton(
-                                    onPressed: () {}, child: Icon(Icons.delete))
-                              ],
-                            ),
-                          ],
-                        ),
                       ),
-                    );
-                  });
-            } else if (state is dataErrorState) {
-              return Text(state.error);
-            }
-            return Text(state.toString());
-          },
-        ),
-      )),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          DialougesBar.showDeleteConfirmationDialog(
+                              context, todo);
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          } else if (state is DataErrorState) {
+            return Center(
+              child: Text(state.errorMessage),
+            );
+          }
+
+          return Container();
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AddDataPage()), // Navigate to AddDataPage
+          );
+        },
+      ),
     );
   }
 }

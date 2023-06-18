@@ -5,5 +5,6 @@ class apiConstants {
 
   static const registration = "";
   static const login = "";
-  static const user = "posts";
+  static const posts = "posts";
+  static const todos = "todos";
 }
