@@ -52,7 +52,7 @@ class SplashScreenState extends State<SplashScreen> {
             Navigator.pushNamed(context as BuildContext, '/login');
           }
         } else {
-          Navigator.pushNamed(context as BuildContext, '/login');
+          Navigator.pushNamed(context as BuildContext, '/home');
         }
       },
     );

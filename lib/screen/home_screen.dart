@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_p2/dashboard/widgets/appbar_widget.dart';
+import 'package:flutter_p2/widgets/appbar_widget.dart';
 import 'package:flutter_p2/features/showdata/cubit/fetchdata_cubit.dart';
 import 'package:flutter_p2/features/showdata/screens/data_page.dart';
 

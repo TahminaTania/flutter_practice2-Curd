@@ -86,8 +86,7 @@ class _DataPageState extends State<DataPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => AddDataPage()), // Navigate to AddDataPage
+            MaterialPageRoute(builder: (context) => AddDataPage()),
           );
         },
       ),

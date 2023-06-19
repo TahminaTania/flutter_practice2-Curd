@@ -29,8 +29,8 @@ class DialougesBar {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Todo'),
-          content: Text('Are you sure you want to delete this todo?'),
+          title: Text('Delete This Data'),
+          content: Text('Are you sure you want to delete this data?'),
           actions: [
             TextButton(
               onPressed: () {
