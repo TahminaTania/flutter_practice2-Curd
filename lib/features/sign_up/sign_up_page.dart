@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_p2/features/showdata/DialougeBox/dialoges.dart';
+import 'package:flutter_p2/features/showdata/cubit/fetchdata_cubit.dart';
 import 'package:flutter_p2/features/sign_up/widgets/reuseable_button.dart';
 import 'package:flutter_p2/features/sign_up/widgets/reuseable_textfield.dart';
 import 'package:flutter_p2/screen/home_screen.dart';
@@ -55,22 +56,55 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  reuseableButton(context, true, () {
-                    // Navigator.pushNamed(context, '/home');
-                    FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
-                            email: _emailController.text,
-                            password: _passController.text)
-                        .then((value) => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SplashScreen()))
-                            });
+                  reuseableButton(context, true, () async {
+                    try {
+                      await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: _emailController.text,
+                              password: _passController.text)
+                          .then((value) => {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SplashScreen()))
+                              });
+                    } on FirebaseAuthException catch (e) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Error'),
+                            content: Text(
+                              e.code,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+
                     //     .onError((error, stackTrace) {
                     //   print("error on ${error.toString()}");
                     // });
-                  })
+                  }),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                      child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/login');
+                    },
+                    child: Text("already have an account?? the Log In"),
+                  ))
                 ],
               ),
             ),
