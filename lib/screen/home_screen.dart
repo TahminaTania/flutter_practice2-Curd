@@ -15,8 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final name = ModalRoute.of(context)?.settings.arguments as String?;
-    // final arguments = (ModalRoute.of(context)?.settings.arguments ??
-    //     <String, dynamic>{}) as Map;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(

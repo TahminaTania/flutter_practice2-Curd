@@ -7,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LogInScreen extends StatelessWidget {
   LogInScreen({Key? key}) : super(key: key);
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class LogInScreen extends StatelessWidget {
         child: Column(
           children: [
             TextField(
-              controller: _emailController,
+              controller: emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: 'username',
@@ -29,25 +29,26 @@ class LogInScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             TextField(
-              controller: _passController,
+              controller: passController,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
               ),
             ),
             SizedBox(height: 16.0),
-            reuseableButton(context, false, () async {
-              // final name = _emailController.text;
-              // SharedPreferences prefs = await SharedPreferences.getInstance();
-              // prefs.setBool(SplashScreenState.KeyLogin, true);
+            reuseableButton(context, true, () async {
+              final name = emailController.text;
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setBool(SplashScreenState.KeyLogin, true);
+              // Navigator.push(context,
+              // MaterialPageRoute(builder: (context) => HomeScreen()));
 
               FirebaseAuth.instance
                   .signInWithEmailAndPassword(
-                      email: _emailController.text,
-                      password: _passController.text)
+                      email: emailController.text,
+                      password: passController.text)
                   .then((value) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
+                Navigator.pushNamed(context, '/home', arguments: name);
               });
             }),
             SizedBox(height: 16.0),
