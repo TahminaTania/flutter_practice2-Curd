@@ -7,8 +7,9 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
 class DataRepository {
-  final http.Client httpClient;
-  DataRepository(this.httpClient);
+  // final http.Client httpClient;
+  // DataRepository(this.httpClient);
+
   String todoUrl = apiConstants.BaseUrl + apiConstants.todos;
 
   Future<List<TodoModel>> fetchData() async {
@@ -45,7 +46,7 @@ class DataRepository {
   }
 
   Future<void> updateTodoById(TodoModel todo) async {
-    final response = await httpClient.put(
+    final response = await http.put(
       Uri.parse('$todoUrl/${todo.id}'),
       body: jsonEncode(todo.toJson()),
       headers: {'Content-Type': 'application/json'},

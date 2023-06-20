@@ -40,7 +40,7 @@ class _AddDataPageState extends State<AddDataPage> {
 
                 try {
                   await context.read<FetchdataCubit>().addData(todo);
-                  Navigator.pop(context); // Go back to the previous page
+                  Navigator.pop(context);
                 } catch (e) {
                   showDialog(
                     context: context,

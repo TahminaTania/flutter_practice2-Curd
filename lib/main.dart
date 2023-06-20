@@ -20,7 +20,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-  final DataRepository repository = DataRepository(http.Client());
+  // final DataRepository repository = DataRepository(http.Client());
+  final DataRepository repository = DataRepository();
 
   // This widget is the root of your application.
   @override
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: SignUpPage(),
+        home: DataPage(),
         // home: StreamBuilder<User?>(
         //   stream: FirebaseAuth.instance.authStateChanges(),
         //   builder: (BuildContext context, snapshot) {
